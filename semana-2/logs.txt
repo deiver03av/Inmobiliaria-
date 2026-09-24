@@ -1,0 +1,55 @@
+===== npm run dev =====
+> semana02-inmobiliaria-api@1.0.0 dev
+> tsx watch --ignore "src/data/**" src/server.ts
+
+🚀 Servidor corriendo en http://localhost:3000
+📍 Endpoints disponibles en http://localhost:3000/api/properties
+
+===== GET /api/properties (listado completo) =====
+$ curl http://localhost:3000/api/properties
+Status: 200 OK
+{"total":12,"data":[...]}
+
+===== GET /api/properties?type=casa (filtro válido) =====
+$ curl "http://localhost:3000/api/properties?type=casa"
+Status: 200 OK
+{"total":3,"data":[...]}
+
+===== POST /api/properties (crear) =====
+$ curl -X POST http://localhost:3000/api/properties -H "Content-Type: application/json" -d "{...}"
+Status: 201 Created
+{"data":{"id":"8c46941d-2381-4fb8-a9f9-17264a56aa9f","title":"Apartaestudio en Laureles","type":"apartamento","price":280000000,"area":42,"city":"Medellín","available":true}}
+
+===== PUT /api/properties/:id (actualizar) =====
+$ curl -X PUT http://localhost:3000/api/properties/8c46941d-2381-4fb8-a9f9-17264a56aa9f -d "{\"price\":300000000,\"available\":false}"
+Status: 200 OK
+{"data":{"id":"8c46941d-2381-4fb8-a9f9-17264a56aa9f","title":"Apartaestudio en Laureles","type":"apartamento","price":300000000,"area":42,"city":"Medellín","available":false}}
+
+===== DELETE /api/properties/:id (eliminar) =====
+$ curl -X DELETE http://localhost:3000/api/properties/8c46941d-2381-4fb8-a9f9-17264a56aa9f -i
+Status: 204 No Content
+
+===== CASO DE ERROR 1: GET a id inexistente =====
+$ curl http://localhost:3000/api/properties/id-que-no-existe -i
+Status: 404 Not Found
+{"error":{"message":"No existe una propiedad con id \"id-que-no-existe\"."}}
+
+===== CASO DE ERROR 2: filtro con type inválido =====
+$ curl "http://localhost:3000/api/properties?type=mansion" -i
+Status: 400 Bad Request
+{"error":{"message":"El tipo \"mansion\" no existe. Válidos: casa, apartamento, local, oficina, terreno."}}
+
+===== CASO DE ERROR 3: POST sin campo obligatorio "title" =====
+$ curl -X POST http://localhost:3000/api/properties -H "Content-Type: application/json" -d "{\"type\":\"casa\",\"price\":100000000,\"area\":100,\"city\":\"Bogota\",\"available\":true}" -i
+Status: 400 Bad Request
+{"error":{"message":"El campo \"title\" es obligatorio (mínimo 3 caracteres)."}}
+
+===== NOTA TÉCNICA =====
+Se detectó y corrigió un bug de configuración: "tsx watch" vigilaba toda la
+carpeta src/, incluyendo src/data/properties.json. Como el propio repository
+escribe en ese archivo en cada POST/PUT/DELETE, el servidor se reiniciaba a
+sí mismo con cada escritura, provocando un 500 intermitente si una petición
+llegaba justo durante el reinicio. Se corrigió excluyendo la carpeta de datos
+del watch en package.json:
+
+  "dev": "tsx watch --ignore \"src/data/**\" src/server.ts"

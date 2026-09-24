@@ -1,0 +1,110 @@
+[
+  {
+    "id": "p001",
+    "title": "Apartamento moderno en Chapinero",
+    "type": "apartamento",
+    "price": 420000000,
+    "area": 78,
+    "city": "Bogotá",
+    "available": true
+  },
+  {
+    "id": "p002",
+    "title": "Casa campestre con jardín",
+    "type": "casa",
+    "price": 650000000,
+    "area": 210,
+    "city": "Chía",
+    "available": true
+  },
+  {
+    "id": "p003",
+    "title": "Local comercial centro histórico",
+    "type": "local",
+    "price": 380000000,
+    "area": 95,
+    "city": "Bogotá",
+    "available": false
+  },
+  {
+    "id": "p004",
+    "title": "Oficina en torre empresarial",
+    "type": "oficina",
+    "price": 290000000,
+    "area": 45,
+    "city": "Bogotá",
+    "available": true
+  },
+  {
+    "id": "p005",
+    "title": "Apartaestudio cerca a universidades",
+    "type": "apartamento",
+    "price": 210000000,
+    "area": 32,
+    "city": "Medellín",
+    "available": true
+  },
+  {
+    "id": "p006",
+    "title": "Casa familiar dos pisos",
+    "type": "casa",
+    "price": 520000000,
+    "area": 160,
+    "city": "Cali",
+    "available": true
+  },
+  {
+    "id": "p007",
+    "title": "Terreno para construcción",
+    "type": "terreno",
+    "price": 150000000,
+    "area": 500,
+    "city": "Girardot",
+    "available": true
+  },
+  {
+    "id": "p008",
+    "title": "Penthouse con vista panorámica",
+    "type": "apartamento",
+    "price": 980000000,
+    "area": 140,
+    "city": "Bogotá",
+    "available": false
+  },
+  {
+    "id": "p009",
+    "title": "Local en centro comercial",
+    "type": "local",
+    "price": 310000000,
+    "area": 60,
+    "city": "Medellín",
+    "available": true
+  },
+  {
+    "id": "p010",
+    "title": "Casa de descanso en clima cálido",
+    "type": "casa",
+    "price": 480000000,
+    "area": 180,
+    "city": "Villavicencio",
+    "available": true
+  },
+  {
+    "id": "p011",
+    "title": "Oficina coworking equipada",
+    "type": "oficina",
+    "price": 195000000,
+    "area": 30,
+    "city": "Bogotá",
+    "available": true
+  },
+  {
+    "id": "p012",
+    "title": "Terreno lote esquinero",
+    "type": "terreno",
+    "price": 220000000,
+    "area": 700,
+    "city": "Chía",
+    "available": false
+  }
+]

@@ -1,0 +1,53 @@
+===== pnpm build (tsc --noEmit) =====
+BUILD OK - sin errores
+
+===== pnpm dev (sin filtro) =====
+$ pnpm dev
+🏠 Resumen del catálogo de propiedades
+----------------------------------------
+Total: 12
+Disponibles: 9
+No disponibles: 3
+Precio promedio: $400.416.666,67
+Más cara: Penthouse con vista panorámica ($980.000.000)
+Más económica: Terreno para construcción ($150.000.000)
+Tipos: apartamento, casa, local, oficina, terreno
+
+📄 Reporte guardado en: /home/claude/semana01-inmobiliaria/output/report.json
+
+===== pnpm dev -- --category casa =====
+$ pnpm dev -- --category casa
+🏠 Resumen del catálogo de propiedades
+----------------------------------------
+Filtro aplicado: casa
+Total: 3
+Disponibles: 3
+No disponibles: 0
+Precio promedio: $550.000.000
+Más cara: Casa campestre con jardín ($650.000.000)
+Más económica: Casa de descanso en clima cálido ($480.000.000)
+Tipos: casa
+
+📄 Reporte guardado en: /home/claude/semana01-inmobiliaria/output/report.json
+
+===== pnpm dev -- --category apartamento =====
+$ pnpm dev -- --category apartamento
+🏠 Resumen del catálogo de propiedades
+----------------------------------------
+Filtro aplicado: apartamento
+Total: 3
+Disponibles: 2
+No disponibles: 1
+Precio promedio: $536.666.666,67
+Más cara: Penthouse con vista panorámica ($980.000.000)
+Más económica: Apartaestudio cerca a universidades ($210.000.000)
+Tipos: apartamento
+
+📄 Reporte guardado en: /home/claude/semana01-inmobiliaria/output/report.json
+
+===== pnpm dev -- --category duplex (categoría inexistente) =====
+$ pnpm dev -- --category duplex
+
+❌ Error: No hay propiedades del tipo "duplex". Tipos disponibles: apartamento, casa, local, oficina, terreno
+
+Exit code esperado: 1

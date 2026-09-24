@@ -1,0 +1,13 @@
+{
+  "name": "inmobiliaria",
+  "version": "1.0.0",
+  "description": "Proyecto de dominio **Inmobiliaria** desarrollado a lo largo del bootcamp (basado en la ruta de `bc-expressjs`). Cada semana vive en su propia carpeta, de forma autocontenida (su propio `package.json`), para poder evaluar el avance de cada entrega sin que una semana dependa de otra.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
