@@ -1,59 +1,56 @@
-import { properties } from "../data/properties.data";
 import { Property } from "../models/property.model";
 import { CreatePropertyDto, UpdatePropertyDto } from "../dtos/property.dto";
+import { prisma } from "../lib/prisma";
 
 export class PropertyRepository {
   async findAll(): Promise<Property[]> {
-    return properties;
+    return await prisma.property.findMany();
   }
 
   async findById(id: number): Promise<Property | undefined> {
-    return properties.find((property) => property.id === id);
+    const property = await prisma.property.findUnique({
+      where: { id }
+    });
+
+    return property ?? undefined;
   }
 
   async create(data: CreatePropertyDto): Promise<Property> {
-    const newId =
-      properties.length > 0
-        ? Math.max(...properties.map((property) => property.id)) + 1
-        : 1;
-
-    const newProperty: Property = {
-      id: newId,
-      ...data
-    };
-
-    properties.push(newProperty);
-
-    return newProperty;
+    return await prisma.property.create({
+      data
+    });
   }
 
   async update(
     id: number,
     data: UpdatePropertyDto
   ): Promise<Property | undefined> {
-    const index = properties.findIndex((property) => property.id === id);
+    const existingProperty = await prisma.property.findUnique({
+      where: { id }
+    });
 
-    if (index === -1) {
+    if (!existingProperty) {
       return undefined;
     }
 
-    properties[index] = {
-      ...properties[index],
-      ...data,
-      id
-    };
-
-    return properties[index];
+    return await prisma.property.update({
+      where: { id },
+      data
+    });
   }
 
   async delete(id: number): Promise<boolean> {
-    const index = properties.findIndex((property) => property.id === id);
+    const existingProperty = await prisma.property.findUnique({
+      where: { id }
+    });
 
-    if (index === -1) {
+    if (!existingProperty) {
       return false;
     }
 
-    properties.splice(index, 1);
+    await prisma.property.delete({
+      where: { id }
+    });
 
     return true;
   }
