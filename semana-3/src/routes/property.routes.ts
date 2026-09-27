@@ -6,6 +6,7 @@ import {
 
 import { validate } from "../middlewares/validate.middleware";
 import { authMiddleware } from "../middlewares/auth.middleware";
+import { roleMiddleware } from "../middlewares/role.middleware";
 
 import { PropertyRepository } from "../repositories/property.repository";
 import { PropertyService } from "../services/property.service";
@@ -17,31 +18,53 @@ const repository = new PropertyRepository();
 const service = new PropertyService(repository);
 const controller = new PropertyController(service);
 
-// Consultar propiedades
+// ==========================================
+// CONSULTAR PROPIEDADES
+// Público: no necesita autenticación
+// ==========================================
+
 router.get("/", controller.getAll);
 
 router.get("/:id", controller.getById);
 
-// Crear propiedad → requiere JWT
+
+// ==========================================
+// CREAR PROPIEDAD
+// Usuario y Admin pueden crear
+// ==========================================
+
 router.post(
   "/",
   authMiddleware,
+  roleMiddleware("usuario", "admin"),
   validate(createPropertySchema),
   controller.create
 );
 
-// Actualizar propiedad → requiere JWT
+
+// ==========================================
+// ACTUALIZAR PROPIEDAD
+// Usuario y Admin pueden actualizar
+// ==========================================
+
 router.put(
   "/:id",
   authMiddleware,
+  roleMiddleware("usuario", "admin"),
   validate(updatePropertySchema),
   controller.update
 );
 
-// Eliminar propiedad → requiere JWT
+
+// ==========================================
+// ELIMINAR PROPIEDAD
+// Solamente Admin puede eliminar
+// ==========================================
+
 router.delete(
   "/:id",
   authMiddleware,
+  roleMiddleware("admin"),
   controller.delete
 );
 
