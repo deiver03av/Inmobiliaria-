@@ -18,15 +18,7 @@ export class PropertyController {
   };
 
   getById = async (req: Request, res: Response): Promise<void> => {
-    const id = Number(req.params.id);
-
-    if (Number.isNaN(id)) {
-      res.status(400).json({
-        error: "Bad Request",
-        message: "The property id must be a number"
-      });
-      return;
-    }
+    const id = String(req.params.id);
 
     const property = await this.service.getPropertyById(id);
 
@@ -54,16 +46,7 @@ export class PropertyController {
   };
 
   update = async (req: Request, res: Response): Promise<void> => {
-    const id = Number(req.params.id);
-
-    if (Number.isNaN(id)) {
-      res.status(400).json({
-        error: "Bad Request",
-        message: "The property id must be a number"
-      });
-      return;
-    }
-
+    const id = String(req.params.id);
     const data = req.body as UpdatePropertyDto;
 
     const property = await this.service.updateProperty(id, data);
@@ -82,15 +65,7 @@ export class PropertyController {
   };
 
   delete = async (req: Request, res: Response): Promise<void> => {
-    const id = Number(req.params.id);
-
-    if (Number.isNaN(id)) {
-      res.status(400).json({
-        error: "Bad Request",
-        message: "The property id must be a number"
-      });
-      return;
-    }
+    const id = String(req.params.id);
 
     const deleted = await this.service.deleteProperty(id);
 

@@ -25,7 +25,7 @@ export class PropertyService {
     };
   }
 
-  async getPropertyById(id: number) {
+  async getPropertyById(id: string) {
     return this.repository.findById(id);
   }
 
@@ -33,11 +33,11 @@ export class PropertyService {
     return this.repository.create(data);
   }
 
-  async updateProperty(id: number, data: UpdatePropertyDto) {
+  async updateProperty(id: string, data: UpdatePropertyDto) {
     return this.repository.update(id, data);
   }
 
-  async deleteProperty(id: number) {
+  async deleteProperty(id: string) {
     return this.repository.delete(id);
   }
-} 
+}

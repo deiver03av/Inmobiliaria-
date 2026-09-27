@@ -1,57 +1,88 @@
 import { Property } from "../models/property.model";
-import { CreatePropertyDto, UpdatePropertyDto } from "../dtos/property.dto";
-import { prisma } from "../lib/prisma";
+import {
+  CreatePropertyDto,
+  UpdatePropertyDto
+} from "../dtos/property.dto";
+import { PropertyModel } from "../models/property.schema";
 
 export class PropertyRepository {
   async findAll(): Promise<Property[]> {
-    return await prisma.property.findMany();
+    const properties = await PropertyModel.find().lean();
+
+    return properties.map((property) => ({
+      id: property._id.toString(),
+      title: property.title,
+      city: property.city,
+      price: property.price,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms,
+      type: property.type
+    }));
   }
 
-  async findById(id: number): Promise<Property | undefined> {
-    const property = await prisma.property.findUnique({
-      where: { id }
-    });
+  async findById(id: string): Promise<Property | undefined> {
+    const property = await PropertyModel.findById(id).lean();
 
-    return property ?? undefined;
-  }
-
-  async create(data: CreatePropertyDto): Promise<Property> {
-    return await prisma.property.create({
-      data
-    });
-  }
-
-  async update(
-    id: number,
-    data: UpdatePropertyDto
-  ): Promise<Property | undefined> {
-    const existingProperty = await prisma.property.findUnique({
-      where: { id }
-    });
-
-    if (!existingProperty) {
+    if (!property) {
       return undefined;
     }
 
-    return await prisma.property.update({
-      where: { id },
-      data
-    });
+    return {
+      id: property._id.toString(),
+      title: property.title,
+      city: property.city,
+      price: property.price,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms,
+      type: property.type
+    };
   }
 
-  async delete(id: number): Promise<boolean> {
-    const existingProperty = await prisma.property.findUnique({
-      where: { id }
-    });
+  async create(data: CreatePropertyDto): Promise<Property> {
+    const property = await PropertyModel.create(data);
 
-    if (!existingProperty) {
-      return false;
+    return {
+      id: property._id.toString(),
+      title: property.title,
+      city: property.city,
+      price: property.price,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms,
+      type: property.type
+    };
+  }
+
+  async update(
+    id: string,
+    data: UpdatePropertyDto
+  ): Promise<Property | undefined> {
+    const property = await PropertyModel.findByIdAndUpdate(
+      id,
+      data,
+      {
+        new: true,
+        runValidators: true
+      }
+    ).lean();
+
+    if (!property) {
+      return undefined;
     }
 
-    await prisma.property.delete({
-      where: { id }
-    });
+    return {
+      id: property._id.toString(),
+      title: property.title,
+      city: property.city,
+      price: property.price,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms,
+      type: property.type
+    };
+  }
 
-    return true;
+  async delete(id: string): Promise<boolean> {
+    const property = await PropertyModel.findByIdAndDelete(id);
+
+    return property !== null;
   }
 }
