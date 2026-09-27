@@ -2,7 +2,7 @@ import { Property } from "../models/property.model";
 
 export const properties: Property[] = [
   {
-    id: 1,
+    id: "1",
     title: "Apartamento moderno en Bogotá",
     city: "Bogotá",
     price: 350000000,
@@ -11,7 +11,7 @@ export const properties: Property[] = [
     type: "Apartamento"
   },
   {
-    id: 2,
+    id: "2",
     title: "Casa familiar en Medellín",
     city: "Medellín",
     price: 520000000,
@@ -20,7 +20,7 @@ export const properties: Property[] = [
     type: "Casa"
   },
   {
-    id: 3,
+    id: "3",
     title: "Apartamento en Cali",
     city: "Cali",
     price: 280000000,
@@ -29,7 +29,7 @@ export const properties: Property[] = [
     type: "Apartamento"
   },
   {
-    id: 4,
+    id: "4",
     title: "Casa amplia en Barranquilla",
     city: "Barranquilla",
     price: 430000000,
@@ -38,7 +38,7 @@ export const properties: Property[] = [
     type: "Casa"
   },
   {
-    id: 5,
+    id: "5",
     title: "Apartamento económico en Bogotá",
     city: "Bogotá",
     price: 220000000,
@@ -47,7 +47,7 @@ export const properties: Property[] = [
     type: "Apartamento"
   },
   {
-    id: 6,
+    id: "6",
     title: "Casa campestre en Pereira",
     city: "Pereira",
     price: 650000000,
